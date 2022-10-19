@@ -53,8 +53,7 @@ const NoteCard = ({ item, onDelete, delayAnimation, isArchived = false }) => {
     <>
       <motion.article variants={cardVariants} initial="hidden" animate="visible" className={`${cardColor} rounded-xl p-5 space-y-3`}>
         <Link to={`/notes/${item.id}`}>
-          <h6 className="text-customGray-50 text-xs">{getDateString(item.updatedAt.seconds)}</h6>
-          {console.log(item.updatedAt)}
+          <h6 className="text-customGray-50 text-xs">Sat, 20 Oct</h6>
           <div className="max-h-52 overflow-hidden min-h-[20px]">{parse(item.excerpt)}</div>
         </Link>
         <div className="flex flex-wrap gap-2 py-4">

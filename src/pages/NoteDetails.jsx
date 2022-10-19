@@ -2,7 +2,7 @@ import Tiptap from "../components/Input/Tiptap";
 import * as Y from "yjs";
 import { useParams } from "react-router-dom";
 import { useEffect } from "react";
-import { encode, decode } from "uint8-to-b64";
+import { encode, decode } from "uint8-to-b64/browser";
 import { debounce } from "../utils";
 import useTiptap from "../hooks/useTiptap";
 import useUpdateValue from "../hooks/useUpdateValue";
@@ -16,7 +16,7 @@ const NoteDetails = () => {
   const { id } = useParams();
   const { editor, ydoc } = useTiptap(id);
   const [updateValue, isLoadingUpdate, errorUpdate] = useUpdateValue();
-  const [createValue, isLoadingCreate, errorCreate] = useCreateValue();
+  const [createValue, isLoadingCreate, errorCreate, createdNoteID] = useCreateValue();
   const [note, isLoadingGet, errorGet] = useGetOneNote(id);
 
   // Create New Note if Note not available yet
@@ -26,7 +26,7 @@ const NoteDetails = () => {
     // if note not found, create New Note
     if (errorGet.message === "not-found") {
       createValue("notes", id, {
-        body: {},
+        body: "",
         collaborators: [user.uid],
         excerpt: "",
         details: {},
@@ -35,13 +35,15 @@ const NoteDetails = () => {
         updatedAt: serverTimestamp(),
       });
     }
-  }, [user, isLoadingGet, errorGet, createValue, id]);
+  }, [user, isLoadingGet, errorGet]);
 
   // Get Initial Ydoc
   useEffect(() => {
     if (isLoadingGet || errorGet || !note || !ydoc) return;
 
-    Y.applyUpdate(ydoc, decode(note.body));
+    if (note.body) {
+      Y.applyUpdate(ydoc, decode(note.body));
+    }
   }, [note, isLoadingGet, ydoc, errorGet]);
 
   // Save to DB every update
@@ -50,21 +52,21 @@ const NoteDetails = () => {
 
     const handlerUpdate = debounce(() => {
       const encodedBody = encode(Y.encodeStateAsUpdate(ydoc));
+      const updateID = createdNoteID ?? note.id;
 
-      updateValue("notes", note.id, {
+      updateValue("notes", updateID, {
         body: encodedBody,
         excerpt: editor.getHTML(),
         updatedAt: serverTimestamp(),
       });
-      console.log("saved");
-    }, 1300);
+    }, 500);
 
     ydoc.on("update", handlerUpdate);
 
     return () => {
       ydoc.off("update", handlerUpdate);
     };
-  }, [editor, ydoc, note, updateValue]);
+  }, [editor, ydoc, note, createdNoteID]);
 
   return (
     <div className="w-full overflow-y-auto">
