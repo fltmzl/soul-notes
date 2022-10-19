@@ -1,0 +1,122 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+@layer base {
+  html,
+  body,
+  #__next,
+  #root {
+    height: 100%;
+  }
+
+  body {
+    @apply text-customDark-200 dark:text-customLight-50;
+  }
+
+  /* width */
+  ::-webkit-scrollbar {
+    width: 5px;
+    height: 5px;
+  }
+
+  /* Track */
+  ::-webkit-scrollbar-track {
+    background: #666666;
+  }
+
+  /* Handle */
+  ::-webkit-scrollbar-thumb {
+    background: #888;
+    border-radius: 10px;
+  }
+
+  /* Handle on hover */
+  ::-webkit-scrollbar-thumb:hover {
+    background: #555;
+  }
+}
+
+@layer components {
+  .form-input {
+    @apply w-full rounded-2xl bg-customLight-50 dark:bg-customDark-50 border-customGray-100 py-3 px-4;
+  }
+
+  .form-label {
+    @apply block mb-2;
+  }
+
+  .navbar-link {
+    @apply flex items-center gap-4 py-4 pl-6 lg:pr-20 rounded-l-xl;
+  }
+
+  .navbar-link.active {
+    @apply flex items-center gap-4 py-4 pl-6 lg:pr-20 rounded-l-xl bg-primary/10 text-primary border-primary border-r-[6px];
+  }
+
+  .my-masonry-grid {
+    @apply flex w-auto;
+  }
+
+  .my-masonry-grid_column {
+    @apply px-2;
+  }
+
+  .my-masonry-grid_column > * {
+    @apply block mb-3;
+  }
+
+  .tiptap-menubar {
+    @apply sticky top-0 z-10 bg-customSecondary flex flex-wrap gap-2 max-w-2xl;
+  }
+
+  .tiptap-menubar button {
+    @apply bg-customPrimary py-1 px-2 text-lg rounded-lg;
+  }
+
+  .tiptap-menubar button.is-active {
+    @apply bg-primary;
+  }
+}
+
+@layer utilities {
+  .bg-customPrimary {
+    @apply bg-customLight-50 dark:bg-customDark-200;
+  }
+
+  .bg-customSecondary {
+    @apply bg-customLight-100 dark:bg-customDark-100;
+  }
+
+  .bg-customTernary {
+    @apply bg-customLight-50 dark:bg-customDark-50;
+  }
+
+  .icon-center {
+    @apply grid place-content-center;
+  }
+
+  .bg-card-red {
+    @apply bg-red-300 dark:bg-red-900;
+  }
+
+  .bg-card-blue {
+    @apply bg-blue-300 dark:bg-blue-900;
+  }
+
+  .bg-card-yellow {
+    @apply bg-yellow-300 dark:bg-yellow-900;
+  }
+
+  .bg-card-green {
+    @apply bg-green-300 dark:bg-green-900;
+  }
+
+  .bg-card-pink {
+    @apply bg-pink-300 dark:bg-pink-900;
+  }
+
+  .bg-card-purple {
+    @apply bg-purple-300 dark:bg-purple-900;
+  }
+}

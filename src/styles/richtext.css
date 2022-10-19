@@ -1,0 +1,48 @@
+.ql-editor * {
+  font-family: "Poppins", sans-serif;
+}
+
+/* .ql-formats path,
+.ql-formats line,
+.ql-formats polygon,
+.ql-formats .ql-fill {
+  stroke: #7c4fff !important ;
+}
+
+.ql-formats .ql-fill {
+  fill: #7c4fff !important ;
+} */
+
+.ql-toolbar,
+.ql-container {
+  /* border-color: transparent !important; */
+  border: none !important;
+  /* border-bottom: 1px solid #353535 !important; */
+}
+
+.ql-blank::before {
+  font-family: "Poppins", sans-serif !important;
+  color: #909090 !important;
+}
+
+html.dark .ql-editor p {
+  color: #f2f2f2 !important;
+}
+
+html.dark .ql-formats svg * {
+  stroke: #f2f2f2 !important;
+}
+
+html.dark .ql-formats .ql-picker {
+  color: #f2f2f2 !important;
+}
+
+html.dark .ql-picker-options {
+  background-color: #242424;
+}
+
+html.dark .ql-picker-label:hover,
+html.dark .ql-picker-item:hover,
+html.dark .ql-picker-label:focus {
+  color: #7c4fff !important;
+}
